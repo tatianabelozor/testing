@@ -49,8 +49,29 @@ public class CalculatorCliTest {
 
     @Test
     public void emptyExpressionsMustBeSkipped() {
-       calculatorCli.runInteractiveSession(new StringReader(";\n;   ;;;\t\n;"));
-       Mockito.verifyZeroInteractions(calculatorMock);
+        calculatorCli.runInteractiveSession(new StringReader(";\n;   ;;;\t\n;"));
+        Mockito.verifyZeroInteractions(calculatorMock);
     }
 
+    @Test
+    public void eachExpressionSeparatedBySemicolonMustBeEvaluated() {
+        calculatorCli.runInteractiveSession(new StringReader("1;2;3;"));
+        verify(calculatorMock).calculate("1");
+        verify(calculatorMock).calculate("2");
+        verify(calculatorMock).calculate("3");
+        verifyNoMoreInteractions(calculatorMock);
+    }
+
+    @Test
+    public void eachExpressionSeparatedBySemicolonMustBeEvaluated_2() {
+        when(calculatorMock.calculate("1")).thenReturn(1d);
+        when(calculatorMock.calculate("2")).thenReturn(2d);
+        when(calculatorMock.calculate("3")).thenReturn(3d);
+
+        calculatorCli.runInteractiveSession(new StringReader("1;2;3;"));
+        verify(calculatorMock).calculate("1");
+        verify(calculatorMock).calculate("2");
+        verify(calculatorMock).calculate("3");
+        verifyNoMoreInteractions(calculatorMock);
+    }
 }

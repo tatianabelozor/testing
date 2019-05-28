@@ -5,9 +5,12 @@
  */
 package com.mycompany.Demo1;
 
+import com.mycompany.CalculatorImp;
+import static jdk.nashorn.internal.objects.Global.Infinity;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Ignore;
+
 /**
  *
  * @author user
@@ -25,5 +28,10 @@ public class AssertTest {
         assertEquals("Hello", "Hel" + "lo");
         assertEquals(1.0, 1d / 3 + 1d / 3 + 1d / 3, 1e-10);
     }
+
+    @Test(expected = ArithmeticException.class)
+    public void zeroTest() throws Exception {
+       // double result = new CalculatorImp().calculate("1/0");
+        assertEquals(1/0,5);
+    }
 }
- 

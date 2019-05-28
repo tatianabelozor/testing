@@ -5,12 +5,17 @@
  */
 package com.mycompany;
 
+import java.util.concurrent.TimeUnit;
+import static jdk.nashorn.internal.objects.Global.Infinity;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
 
 /**
  *
@@ -18,6 +23,9 @@ import static org.junit.Assert.*;
  */
 public class CalculatorImpTest {
 
+    @Rule
+    public TestRule timeout = new Timeout(1, TimeUnit.MINUTES);
+    // public TestRule timeout = new Timeout(1, TimeUnit.MILLISECONDS);//выдаст ошибку
     private CalculatorImp calculator;
 
     @Before
@@ -31,6 +39,19 @@ public class CalculatorImpTest {
         assertEquals(0, result, 1e-9);
     }
 
+    /* @Test(timeout = 100)
+    public void zeroTest() throws Exception {
+        double result = new CalculatorImp().calculate("1");
+        assertEquals(0, result, 1e-9);
+    }
+     */
+    
+  @Test
+    public void Zero() throws Exception {
+        double result = new CalculatorImp().calculate("1/0");
+        assertEquals(Infinity, result, 1e-9);
+    }
+    
     @Test
     public void floatingPointTest() throws Exception {
         double result = new CalculatorImp().calculate("-3000.02");
