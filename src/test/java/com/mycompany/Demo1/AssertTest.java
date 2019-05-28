@@ -31,7 +31,6 @@ public class AssertTest {
 
     @Test(expected = ArithmeticException.class)
     public void zeroTest() throws Exception {
-       // double result = new CalculatorImp().calculate("1/0");
-        assertEquals(1/0,5);
+        assertEquals(1 / 0, 5);
     }
 }
