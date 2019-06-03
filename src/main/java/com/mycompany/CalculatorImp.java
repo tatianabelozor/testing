@@ -11,11 +11,19 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author user
+ * Класс, который будет заниматься вычислениями:метод calculate отвечает за
+ * деление на ноль, операциями с отрицательными числами и числами с плавающей
+ * точкой, * Тип строка(String) используется для вычисления.
  */
 public class CalculatorImp implements Calculator {
 
+    /**
+     *
+     * Отвечает за деление на ноль, вычиления с плавающей точкой, работа с
+     * функциями, сложные вычисления
+     */
     @Override
+
     public double calculate(String expression) {
 
         // throw new UnsupportedOperationException();
@@ -30,6 +38,12 @@ public class CalculatorImp implements Calculator {
         }
     }
 
+    /**
+     * 
+     *  Метод defineMathFunctions вычисляет значения функций.
+     * @param scriptEngine
+     * @throws ScriptException 
+     */
     private static void defineMathFunctions(ScriptEngine scriptEngine) throws ScriptException {
         for (String function : new String[]{"sin", "cos", "sqrt"}) {
             scriptEngine.eval("function " + function + "(x){return Java.type('java.lang.Math')." + function + "(x);}");

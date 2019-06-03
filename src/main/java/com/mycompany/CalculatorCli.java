@@ -13,7 +13,9 @@ import java.util.stream.Stream;
 
 /**
  *
- * @author user
+ * Командный интерфейс, принимающий значения из консоли, которые вводит пользователь.
+ * Вызывает класс CalculatorImp.
+ * Вызывает интерактивную сессию. Работает с потоками(stream Reader). 
  */
 public class CalculatorCli {
 
@@ -23,10 +25,18 @@ public class CalculatorCli {
         this.calculator = calculator;
     }
 
+ /**
+  * Вызов интерактивной сессии
+  * @param reader 
+  */
     public void runInteractiveSession(Reader reader) {
         runInteractiveSession(reader, System.out::println);
     }
-
+/**
+ * Сессия, проверяюшая действия пользователя.
+ * @param reader
+ * @param resultConsumer 
+ */
     public void runInteractiveSession(Reader reader, DoubleConsumer resultConsumer) {
         new BufferedReader(reader).lines()
                 .flatMap(s -> Stream.of(s.split(";")))
